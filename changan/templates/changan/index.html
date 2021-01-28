@@ -1,0 +1,38 @@
+{% extends "changan/base.html" %}
+{% block content %}
+
+<div class="d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center highlight-blue" id="About" style="height: 400px;background-color: rgba(255,255,255,0.9);">
+    <div class="container">
+        <div class="intro">
+            {% if user.is_authenticated %}
+            <h2 class="text-center" style="color: #172f76;">Здравствуйте {{ user.username }}!</h2>
+            <hr style="height: 2px;color: #214a80;background-color: #172f76;" />
+            <p class="text-center" style="color: #172f76;font-family: Muli, sans-serif;">
+                Вы успешно вошли в сервис. Теперь сверху в навигационном меню выберите нужный Вам отдел и нажмите на нужный отчет.
+                Для того, чтобы получитить отчет в Экзель формате необходимо сначала осуществить поиск.
+            </p>
+            <p class="text-center" style="color: #172f76;font-family: Muli, sans-serif;">
+                Для того, чтобы не нагружать веб сервис для отображения в браузере будут выводиться первые 100 (сто) строк,
+                если захотите подробнее просмотреть весь отчет, Вам небходимо будет его скачать в Экзель. Чтобы это сделать небходимо
+                <strong><b>после поиска</b></strong> нажать на кнопку "Экзель"!
+            </p>
+            {% else %}
+            <h2 class="text-center" style="color: #172f76;">Приветствуем Вас!</h2>
+            <hr style="height: 2px;color: #214a80;background-color: #172f76;" />
+            <p class="text-center" style="color: #172f76;font-family: Muli, sans-serif;">
+                Для того, чтобы воспользоваться сервисом отчеты, Вам необходимо аутентифицироваться (т.е. ввести логин и пароль).
+                Для получения логина и пароля просьба обратиться в Отдел Информационных технологий.
+                После того, как Вы аутентифицируетесь, сверху в навигационном меню выберите нужный Вам отдел и нажмите на нужный отчет.
+                Для того, чтобы получитить отчет в Экзель формате необходимо сначала осуществить поиск.
+            </p>
+            {% endif %}
+        </div>
+        {% if user.is_authenticated %}
+
+        {% else %}
+        <div class="buttons" style="text-align: center"><a class="btn text-capitalize" role="button" href="{% url 'login' %}" style="background-color: #172f76;color: #ffffff;font-family: Muli, sans-serif;font-weight: 300;font-size: 15px;"><strong>Войти</strong><br /></a></div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

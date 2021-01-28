@@ -1,0 +1,48 @@
+{% extends "changan/base.html" %}
+{% block content %}
+<div>
+    <div class="container">
+        <form method="GET">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group input-group-sm" style="margin: 10px;">
+                    <div class="input-group-prepend"><span class="input-group-text">Дата от</span></div><input type="date" value="{{date_beg}}" class="form-control" name="date_beg" />
+                    <div class="input-group-append"></div>
+                </div>
+                <div class="input-group input-group-sm" style="margin: 10px;">
+                    <div class="input-group-prepend"><span class="input-group-text">Дата до</span></div><input type="date" value="{{date_end}}" class="form-control" name="date_end" />
+                    <div class="input-group-append"></div>
+                </div>
+                <div role="group" class="btn-group btn-group-sm" style="margin: 10px;"><a href="{% url 'payments_excel' %}" class="btn btn-primary" type="button" style="margin: 0px;margin-right: 15px;border-radius: 5px;">
+                    <i class="far fa-file-excel"> </i> Экзель</a>
+                    <button class="btn btn-primary" type="submit" style="border-radius: 5px;">Поиск</button></div>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+<div class="example_table">
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th scope="col">Дата</th>
+                <th scope="col">Погашение, сом</th>
+                <th scope="col">Погашение, доллар</th>
+                <th scope="col">Проценты, сом</th>
+                <th scope="col">Проценты, доллар</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in row %}
+            <tr>
+                <td>{{ r.Date }}</td>
+                <td>{{ r.Pay417 }}</td>
+                <td>{{ r.Pay840 }}</td>
+                <td>{{ r.Proc417 }}</td>
+                <td>{{ r.Proc840 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

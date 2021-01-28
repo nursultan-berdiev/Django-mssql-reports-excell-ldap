@@ -1,0 +1,105 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Bootstrap CSS CDN-->
+    <link rel="stylesheet" href="{% static 'changan/bootstrap.min.css' %}" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'changan/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'changan/Advanced-NavBar---Multi-dropdown.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'changan/Dark-NavBar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'changan/Navbar-Fixed-Side.css' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'changan/fonts/ionicons.min.css' %}">
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'changan/fonts/simple-line-icons.min.css' %}">-->
+
+    <link rel="stylesheet" type="text/css" href="{% static 'changan/jquery.dataTables.min.css' %}">
+
+    <script defer type="text/javascript" src="{% static 'changan/solid.js' %}" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer type="text/javascript" src="{% static 'changan/fontawesome.js' %}" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+  <div class="header2 bg-success-gradiant">
+  <div class="">
+    <!-- Header 1 code -->
+    <nav class="navbar navbar-expand-lg h2-nav">
+      <a class="navbar-brand" href="{% url 'index' %}">ЗАО МФК "Чанг Ан"</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#header2" aria-controls="header2" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="icon-menu"></span>
+			</button>
+      <div class="collapse navbar-collapse hover-dropdown" id="header2">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown position-relative">
+            <a class="nav-link dropdown-toggle" href="#" id="h2-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Кредиты <i class="icon-arrow-down ml-1 font-12"></i>
+						</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'overdue' %}">Просрочки</a></li>
+              <li class="dropdown-submenu position-relative">
+                  <a class="dropdown-toggle dropdown-item" data-toggle="dropdown" href="#">Погашения по кредитам
+                      <i class="icon-arrow-right float-right mt-1"></i>
+                  </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{% url 'payments' %}">За период</a></li>
+                  <li><a class="dropdown-item" href="{% url 'payments_purpose' %}">По целям</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown position-relative">
+            <a class="nav-link dropdown-toggle" href="#" id="h2-dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Комплаенс <i class="icon-arrow-down ml-1 font-12"></i>
+						</a>
+            <ul class="dropdown-menu">
+
+              <li><a class="dropdown-item" href="{% url 'verifications' %}">Верификации</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active"><a class="nav-link" href="{% url 'index' %}"><i class="icon-bubble"></i> Как пользоваться?</a></li>
+          {% if user.is_authenticated %}
+          <li class="nav-item"><a class="btn rounded-pill btn-dark py-2 px-4" href="{% url 'logout' %}">Выйти</a></li>
+          {% else %}
+          <li class="nav-item"><a class="btn rounded-pill btn-dark py-2 px-4" href="{% url 'login' %}">Войти</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+    <!-- End Header 1 code -->
+  </div>
+</div>
+<div class="container">
+    {% if user.is_authenticated %}
+    <h2 class="d-inline-block">{{title}}</h2>
+    {% endif %}
+</div>
+{% block content %}{% endblock %}
+    <script type="text/javascript" src="{% static 'changan/jquery-3.5.1.js' %}"></script>
+    <script type="text/javascript" src="{% static 'changan/jquery.dataTables.min.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#example').DataTable();
+        } );
+    </script>
+
+    <!---->
+
+    <script type="text/javascript" src="{% static 'changan/popper.min.js' %}" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!--<script type="text/javascript" src="{% static 'changan/jquery.min.js' %}" crossorigin="anonymous"></script>-->
+    <script type="text/javascript" src="{% static 'changan/bootstrap.min.js' %}" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'changan/1f5e4d9175.js' %}"></script>
+    <script type="text/javascript" src="{% static 'changan/Advanced-NavBar---Multi-dropdown.js' %}" crossorigin="anonymous"></script>
+</body>
+
+</html>
+

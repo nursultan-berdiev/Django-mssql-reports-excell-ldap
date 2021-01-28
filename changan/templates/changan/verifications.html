@@ -1,0 +1,120 @@
+{% extends "changan/base.html" %}
+{% block content %}
+<div>
+    <div class="container">
+        <form method="GET">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group input-group-sm" style="margin: 10px;">
+                    <div class="input-group-prepend"><span class="input-group-text">Дата от</span></div><input type="date" value="{{ date_beg }}" class="form-control" name="date_beg" />
+                    <div class="input-group-append"></div>
+                </div>
+                <div class="input-group input-group-sm" style="margin: 10px;">
+                    <div class="input-group-prepend"><span class="input-group-text">Дата до</span></div><input type="date" value="{{ date_end }}" class="form-control" name="date_end" />
+                    <div class="input-group-append"></div>
+                </div>
+                <div role="group" class="btn-group btn-group-sm" style="margin: 10px;"><a href="{% url 'excel_verifications' %}" class="btn btn-primary" type="button" style="margin: 0px;margin-right: 15px;border-radius: 5px;">
+                    <i class="far fa-file-excel"> </i> Экзель</a>
+                    <button class="btn btn-primary" type="submit" style="border-radius: 5px;">Поиск</button></div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group input-group-sm" style="margin: 10px;">
+                    <div class="input-group-prepend"><span class="input-group-text">ФИО клиента</span></div><input type="text" value="{{ client_name }}" class="form-control" name="client_name"/>
+                    <div class="input-group-append"></div>
+                </div>
+                <div class="input-group input-group-sm" style="margin: 10px;">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Верифицирован</span>
+                    </div>
+                    <select class="form-control form-control-sm" name="verificated" >
+                        {% if verificated == 'Да' %}
+                    <option value="">Все</option>
+                    <option selected value="Да">Да</option>
+                    <option value="Нет">Нет</option>
+                    <option value="Не идентифицирован">Не идентифицирован</option>
+                        {% elif verificated == 'Нет' %}
+                    <option value="">Все</option>
+                    <option value="Да">Да</option>
+                    <option selected value="Нет">Нет</option>
+                    <option value="Не идентифицирован">Не идентифицирован</option>
+                        {% elif verificated == 'Не идентифицирован' %}
+                    <option value="">Все</option>
+                    <option value="Да">Да</option>
+                    <option value="Нет">Нет</option>
+                    <option selected value="Не идентифицирован">Не идентифицирован</option>
+                        {% else %}
+                    <option selected value="">Все</option>
+                    <option value="Да">Да</option>
+                    <option value="Нет">Нет</option>
+                    <option value="Не идентифицирован">Не идентифицирован</option>
+                        {% endif %}
+                    <div class="input-group-append"></div>
+
+                    </select>
+                    </div>
+                <div class="input-group input-group-sm" style="margin: 10px;">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Уровень Риска</span>
+                    </div>
+                    <select class="form-control form-control-sm" name="risk" >
+                        {% if risk == 1 %}
+                    <option value="1,2,3">Все</option>
+                    <option selected value="">Низкий</option>
+                    <option value="Нет">Средний</option>
+                    <option value="Нет">Высокий</option>
+                        {% elif risk == 2 %}
+                    <option value="1,2,3">Все</option>
+                    <option value="">Низкий</option>
+                    <option value="Нет">Средний</option>
+                    <option selected value="Нет">Высокий</option>
+                        {% elif risk == 3 %}
+                    <option value="1,2,3">Все</option>
+                    <option value="">Низкий</option>
+                    <option selected value="Нет">Средний</option>
+                    <option value="Нет">Высокий</option>
+                        {% else %}
+                    <option selected value="1,2,3">Все</option>
+                    <option value="">Низкий</option>
+                    <option value="Нет">Средний</option>
+                    <option value="Нет">Высокий</option>
+                        {% endif %}
+                    <div class="input-group-append"></div>
+
+                    </select>
+                    </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        </form>
+    </div>
+</div>
+
+<div class="example_table">
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th scope="col">ID Клиента</th>
+                <th scope="col">Клиент</th>
+                <th scope="col">Дата верификации</th>
+                <th scope="col">Инспектор</th>
+                <th scope="col">Верификатор</th>
+                <th scope="col">Уровень риска</th>
+                <th scope="col">Верифицирован</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in row %}
+            <tr>
+                <td>{{ r.CustomerID }}</td>
+                <td>{{ r.ClientName }}</td>
+                <td>{{ r.VerificationDate }}</td>
+                <td>{{ r.Inspector }}</td>
+                <td>{{ r.Verificator }}</td>
+                <td>{{ r.Risk }}</td>
+                <td>{{ r.Verificated }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
